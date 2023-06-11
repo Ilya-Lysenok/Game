@@ -120,14 +120,14 @@ y=0
 for r in level:
         for c in r:
             if c == 'r':
-                n = GameSprite('images/nothing.png',x, y, 40, 80 ,0)
+                n = GameSprite('nothing.png',x, y, 40, 80 ,0)
                 blocks_r.append(n)
                 items.add(n)
             if c == 'l':
-                n = GameSprite('images/nothing.png',x, y, 40, 80 ,0)
+                n = GameSprite('nothing.png',x, y, 40, 80 ,0)
                 blocks_l.append(n)
                 items.add(n)
             if c == '-':
-                platform = GameSprite('images/platform.png',x, y, 40, 40 ,0)
+                platform = GameSprite('platform.png',x, y, 40, 40 ,0)
                 platforms.append(platform)
                 items.add(platform)
