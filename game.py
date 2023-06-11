@@ -44,3 +44,30 @@ class Player(GameSprite):
             self.rect.y -= self.speed
         if keys[K_DOWN] and self.rect.y < win_height - 80:
             self.rect.y += self.speed
+           
+        #класс-наследник для спрайта-врага (перемещается сам)
+class Enemy(GameSprite): 
+    def __init__(self, player_image, player_x, player_y, size_x, size_y, player_speed, side='left'):
+        GameSprite.__init__(self, player_image, player_x, player_y, size_x, size_y, player_speed)        
+        self.side = side
+    
+    def update(self):
+        global side
+        if self.side == 'right':
+            self.rect.x -= self.speed
+        if self.side == 'left':
+            self.rect.x += self.speed
+f=1
+class Mana(GameSprite): 
+    def __init__(self, player_image, player_x, player_y, size_x, size_y, player_speed, side='left'):
+        GameSprite.__init__(self, player_image, player_x, player_y, size_x, size_y, player_speed)        
+        self.side = side
+    def update(self):
+        global side,f      
+        if self.side == 'left':
+            self.rect.x -= self.speed
+        if self.side == 'right':
+            self.rect.x += self.speed
+window = display.set_mode((win_width, win_height))
+display.set_caption("Arcada")
+background = transform.scale(image.load("background.png"), (win_width, win_height))
