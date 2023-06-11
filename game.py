@@ -68,6 +68,17 @@ class Mana(GameSprite):
             self.rect.x -= self.speed
         if self.side == 'right':
             self.rect.x += self.speed
+            
 window = display.set_mode((win_width, win_height))
 display.set_caption("Arcada")
 background = transform.scale(image.load("background.png"), (win_width, win_height))
+
+font2 = font.Font(None, 40)
+font1 = font.Font(None, 80)
+win = font1.render('YOU WIN!', True, (255, 255, 255))
+lose = font1.render('YOU LOSE!', True, (180, 0, 0))
+
+items = sprite.Group()
+
+display.update()
+clock.tick(FPS)
