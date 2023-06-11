@@ -3,11 +3,9 @@ from random import randint
 from pygame import *
 init() 
 
-
 # Глобальные переменные (настройки)
 win_width = 1280 
 win_height = 720
-
 
 # класс-родитель для других спрайтов
 class GameSprite(sprite.Sprite):
@@ -72,6 +70,7 @@ class Mana(GameSprite):
             self.rect.x -= self.speed
         if self.side == 'right':
             self.rect.x += self.speed
+            
 window = display.set_mode((win_width, win_height))
 display.set_caption("Arcada")
 background = transform.scale(image.load("images/bgr.png"), (win_width, win_height))
