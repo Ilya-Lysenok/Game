@@ -1,11 +1,15 @@
+# Подключить нужные модули
 from random import randint 
 from pygame import *
 init() 
+
 
 # Глобальные переменные (настройки)
 win_width = 1280 
 win_height = 720
 
+
+# класс-родитель для других спрайтов
 class GameSprite(sprite.Sprite):
   # конструктор класса
     def __init__(self, player_image, player_x, player_y, size_x, size_y, player_speed):
@@ -26,7 +30,7 @@ class GameSprite(sprite.Sprite):
   # метод, отрисовывающий героя на окне
     def reset(self):
         window.blit(self.image, (self.rect.x, self.rect.y))
-     
+
 #класс-наследник для спрайта-игрока (управляется стрелками)
 class Player(GameSprite):
     def update_l_r(self):
@@ -44,8 +48,8 @@ class Player(GameSprite):
             self.rect.y -= self.speed
         if keys[K_DOWN] and self.rect.y < win_height - 80:
             self.rect.y += self.speed
-           
-        #класс-наследник для спрайта-врага (перемещается сам)
+
+#класс-наследник для спрайта-врага (перемещается сам)
 class Enemy(GameSprite): 
     def __init__(self, player_image, player_x, player_y, size_x, size_y, player_speed, side='left'):
         GameSprite.__init__(self, player_image, player_x, player_y, size_x, size_y, player_speed)        
@@ -68,17 +72,48 @@ class Mana(GameSprite):
             self.rect.x -= self.speed
         if self.side == 'right':
             self.rect.x += self.speed
-            
 window = display.set_mode((win_width, win_height))
 display.set_caption("Arcada")
-background = transform.scale(image.load("background.png"), (win_width, win_height))
+background = transform.scale(image.load("images/bgr.png"), (win_width, win_height))
 
+# во время игры пишем надписи размера 40
 font2 = font.Font(None, 40)
 font1 = font.Font(None, 80)
 win = font1.render('YOU WIN!', True, (255, 255, 255))
 lose = font1.render('YOU LOSE!', True, (180, 0, 0))
 
 items = sprite.Group()
+#Персонажи игры:
+level=['                           ',
+'                               d   ',
+'   t      l                       ',
+'                r         o    l ',
+'r-------/         / ------------ ',
+'                                 ',
+'                                 ',
+'           l                      ',
+'    r          o   c   o       l  ',
+'      /----------------------/      ',
+'                                     ',
+'                                     ', 
+'    r    l                  r     l  ',
+'                                   ',
+'r    s         r   k  c          l ',
+'---------------------------------  ',
+]
+platforms = []
+stairs=[]
+coins=[]
+monsters=[]
+blocks_r=[]
+blocks_l=[]
+manas = sprite.Group() # группа що клонує атакуючі шари
 
-display.update()
-clock.tick(FPS)
+
+k_door = False # чи підібрано ключ для дверей
+
+o_chest = False # чи відкрита скриня
+
+c_count = 0 # лічильник монет
+x=0
+y=0
