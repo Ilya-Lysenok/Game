@@ -131,6 +131,9 @@ for r in level:
                 platform = GameSprite('platform.png',x, y, 40, 40 ,0)
                 platforms.append(platform)
                 items.add(platform)
+            if c=='s':
+                hero = Player('images/sprite.png', x, y,40,40, 4)
+                items.add(hero)
             if c=='c':
                 monster = Enemy('monster_crow.png', x, y,40,40, 2,'left')
                 monsters.append(monster)
